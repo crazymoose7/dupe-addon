@@ -23,7 +23,7 @@ public class PaperDupe extends Module {
     @EventHandler
     private void onTick(TickEvent.Post event) {
         if(!(mc.player.getInventory().getMainHandStack().getItem()  == Items.WRITABLE_BOOK)) {
-            mc.player.sendMessage(Text.of("Please hold a writable book!"));
+            mc.player.sendMessage(Text.of("Please hold a writable book!"), true);
             toggle();
             return;
         }
