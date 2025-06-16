@@ -3,7 +3,7 @@
   "id": "paper-dupe",
   "version": "${version}",
   "name": "Paper Dupe",
-  "description": "Makes Lefty's dupe a Meteor addon",
+  "description": "Makes 0x150 dupe a Meteor addon",
   "authors": [
     "crazymoose77756"
   ],

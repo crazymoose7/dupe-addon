@@ -12,7 +12,7 @@ public class Main extends MeteorAddon {
 
     @Override
     public void onInitialize() {
-        LOG.info("Initializing Meteor Addon Template");
+        LOG.info("Initializing Paper Dupe Addon");
 
         // Modules
         Modules.get().add(new PaperDupe());
