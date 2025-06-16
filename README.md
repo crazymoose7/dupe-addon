@@ -1,5 +1,5 @@
 # Meteor Paper Dupe
 
-Just implements leftys paper dupe in the form of a meteor addon.
+Just implements 0x150 (i think) paper dupe in the form of a meteor addon.
 
-All credits to lefty and everyone for their respective code.
+All credits to the original creator and everyone for their respective code.
