@@ -4,11 +4,11 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectMaps;
 import meteordevelopment.meteorclient.events.world.TickEvent;
 import meteordevelopment.meteorclient.systems.modules.Module;
 import meteordevelopment.orbit.EventHandler;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.network.packet.c2s.play.BookUpdateC2SPacket;
 import net.minecraft.network.packet.c2s.play.ClickSlotC2SPacket;
 import net.minecraft.screen.slot.SlotActionType;
+import net.minecraft.screen.sync.ItemStackHash;
 import net.minecraft.text.Text;
 
 import java.util.List;
@@ -22,25 +22,25 @@ public class PaperDupe extends Module {
 
     @EventHandler
     private void onTick(TickEvent.Post event) {
-        if(!(mc.player.getInventory().getMainHandStack().getItem()  == Items.WRITABLE_BOOK)) {
+        if(!(mc.player.getInventory().getSelectedStack().getItem()  == Items.WRITABLE_BOOK)) {
             mc.player.sendMessage(Text.of("Please hold a writable book!"), true);
             toggle();
             return;
         }
         for (int i = 9; i < 44; i++) {
-            if (36 + mc.player.getInventory().selectedSlot == i) continue;
+            if (36 + mc.player.getInventory().getSelectedSlot() == i) continue;
             mc.player.networkHandler.sendPacket(new ClickSlotC2SPacket(
                 mc.player.currentScreenHandler.syncId,
                 mc.player.currentScreenHandler.getRevision(),
-                i,
-                1,
+                (short) i,
+                (byte) 1,
                 SlotActionType.THROW,
-                ItemStack.EMPTY,
-                Int2ObjectMaps.emptyMap()
+                Int2ObjectMaps.emptyMap(),
+                ItemStackHash.EMPTY
             ));
         }
         mc.player.networkHandler.sendPacket(new BookUpdateC2SPacket(
-            mc.player.getInventory().selectedSlot, List.of(""), Optional.of("The quick brown fox jumps over the lazy dog"
+            mc.player.getInventory().getSelectedSlot(), List.of(""), Optional.of("The quick brown fox jumps over the lazy dog"
         )));
         toggle();
     }
